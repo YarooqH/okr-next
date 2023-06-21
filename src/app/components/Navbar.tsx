@@ -3,11 +3,11 @@ import { UserButton } from '@clerk/nextjs'
 
 function Navbar() {
   return (
-    <div className='p-3 w-full'>
-        <div className='float-right'>
-            <UserButton  />
+    <header className='p-1 w-full relative'>
+        <div className='m-2 right-0'>
+            <UserButton  afterSignOutUrl='/' />
         </div>
-    </div>
+    </header>
   )
 }
 
