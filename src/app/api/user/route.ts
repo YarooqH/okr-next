@@ -17,17 +17,22 @@ async function main() {
 }
 
 export const POST = async (req: Request, res: NextResponse) => {
-  // console.log("body", req)
+  console.log("body", req?.body)
   try {
     const body = await req.json();
-    const user = await prisma?.user?.create({
-      data: {
-        email: body?.email,
-        name: body?.name,
-      },
-    });
-
-    return NextResponse.json(req);
+    const isExist = await prisma?.user?.findFirst({ where: {email: body?.email}})
+    if(isExist){
+      return NextResponse.json(isExist);
+    } else {
+      const user = await prisma?.user?.create({
+        data: {
+          email: body?.email,
+          name: body?.name,
+        },
+      });
+  
+      return NextResponse.json(user);
+    }
   } catch (e) {
     console.log(e);
   }
@@ -36,9 +41,6 @@ export const POST = async (req: Request, res: NextResponse) => {
 
 export async function GET(req: NextRequest) {
   try {
-    // let res = await main();
-    // await connectMongo();
-    // let newUser = await User.find({})
     const user = await prisma?.leaderBoard?.findMany();
     return NextResponse.json(user);
   } catch (e) {
