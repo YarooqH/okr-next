@@ -1,11 +1,15 @@
 import React from 'react'
 import { UserButton } from '@clerk/nextjs'
+import { MyAwesomeThemeComponent } from '../page'
 
 function Navbar() {
   return (
-    <header className='p-1 w-full relative'>
-        <div className='m-2 right-0'>
-            <UserButton  afterSignOutUrl='/' />
+    <header className='flex p-1 w-full'>
+      <div className='w-[98%]'>
+      </div>
+        <div className='p-1 flex gap-5'>
+            <MyAwesomeThemeComponent />
+            <UserButton  afterSignOutUrl='/'/>
         </div>
     </header>
   )
